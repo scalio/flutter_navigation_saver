@@ -114,6 +114,7 @@ class NavigationSaver extends NavigatorObserver {
     final int localRoutesVersion = _routesVersion;
     final List<RouteSettings> localActiveRouteSettings = _activeRoutes
         .map((Route route) => route.settings)
+        .where((RouteSettings settings) => settings.name != null)
         .where((RouteSettings settings) => settings.name != restoreRouteName)
         .map((RouteSettings settings) {
       if (settings.arguments is RestoredArguments) {
