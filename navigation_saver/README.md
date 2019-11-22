@@ -4,7 +4,7 @@ This library will help to restore navigation stack after application kill.
 
 ## Overview
 
-This is the core library and usually shoudn't be used directly. Please check [general readme](..) first.
+This is the core library and usually shoudn't be used directly. Please check [general readme](../../../) first.
 
 
 ## How does core module work:
