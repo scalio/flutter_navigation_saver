@@ -22,7 +22,7 @@ This is the core library and usually shoudn't be used directly. Please check [ge
 
 Flutter has a great feature in the navigation - you can wait for the next page result by using `await` keyword. And because when we restore the navigation stack we want to keep this ability we restore all routes with the new argument (`RestoredArguments`) class. This class has 2 fields: real page arguments and the next page information (`NextPageInfo`). See what can you do with it [bellow](#how-should-i-get-a-result-of-the-next-route-after-the-kill-nextpageinfo-class).
 
-## how should I get a result of the next route after the kill (`NextPageInfo` class)
+## How should I get a result of the next route after the kill (`NextPageInfo` class)
 
 Imagine you had a stack of widgets A -> B. And widget A was waiting for result of B. Usually you do this by using such code:
 
