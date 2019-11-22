@@ -32,15 +32,14 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (RouteSettings routeSettings) => _navigationSaver.onGenerateRoute(
         routeSettings,
         (
-          RouteSettings settings,
-          String routeName,
-          Object routeArguments, {
+          RouteSettings settings, {
           NextPageInfo nextPageInfo,
         }) =>
             MaterialPageRoute(
           builder: (BuildContext context) => MyHomePage(
-            initialCounter:
-                routeArguments is Map ? MyHomePageArguments.fromJson(routeArguments).deepIndex : 0,
+            initialCounter: settings.arguments is Map
+                ? MyHomePageArguments.fromJson(settings.arguments as Map<String, dynamic>).deepIndex
+                : 0,
             nextPageInfo: nextPageInfo,
           ),
           settings: routeSettings,

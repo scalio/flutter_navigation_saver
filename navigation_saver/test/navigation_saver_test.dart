@@ -174,15 +174,13 @@ class _MyApp extends StatelessWidget {
       onGenerateRoute: (RouteSettings routeSettings) => _navigationSaver.onGenerateRoute(
         routeSettings,
         (
-          RouteSettings settings,
-          String routeName,
-          Object routeArguments, {
+          RouteSettings settings, {
           NextPageInfo nextPageInfo,
         }) =>
             MaterialPageRoute(
           builder: (BuildContext context) {
             _latestContext = _latestContext ?? context;
-            final int currentDeepIndex = (routeArguments as int) ?? 0;
+            final int currentDeepIndex = (settings.arguments as int) ?? 0;
             return Scaffold(
               body: Column(
                 children: <Widget>[

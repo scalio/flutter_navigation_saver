@@ -13,9 +13,7 @@ typedef NavigationRoutesRestorer = Future<Iterable<RouteSettings>> Function();
 
 typedef WidgetRouteGenerator = Route<dynamic> Function(RouteSettings routeSettings);
 typedef NavigationSaverRouteFactory = Route<dynamic> Function(
-  RouteSettings settings,
-  String routeName,
-  Object routeArguments, {
+  RouteSettings settings, {
   NextPageInfo nextPageInfo,
 });
 
@@ -73,9 +71,11 @@ class NavigationSaver extends NavigatorObserver {
         nextPageInfo = routeArguments.nextPageInfo;
       }
       return routeFactory(
-        routeSettings,
-        routeSettings.name,
-        realArguments,
+        RouteSettings(
+          name: routeSettings.name,
+          arguments: realArguments,
+          isInitialRoute: routeSettings.isInitialRoute,
+        ),
         nextPageInfo: nextPageInfo,
       );
     }

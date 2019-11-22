@@ -72,11 +72,9 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (RouteSettings routeSettings) => _navigationSaver.onGenerateRoute(
         routeSettings,
         (
-          RouteSettings settings,
-          String routeName,
-          Object routeArguments, {
+          RouteSettings settings, {
           NextPageInfo nextPageInfo,
-        }) => /* todo: generate your application widgets here. use `routeName` and `routeArguments` */,
+        }) => /* todo: generate your application widgets here. use `settings`, not `routeSettings` */,
       ),
       navigatorObservers: [_navigationSaver],
     );
