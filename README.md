@@ -30,7 +30,7 @@ This package listen for all your navigation events and save them. On the applica
 		a. If this route was pushed by the client code (not the restoration), then it will call `NavigationSaverRouteFactory` with passed settings, routeName = settings.name and routeArguments = settings.arguments. Also nextPageInfo will be null.
 		b. If this route was pushed by the restoration logic, then it will call `NavigationSaverRouteFactory` with passed settings, routeName = settings.name and routeArguments = restoredRouteArguments (note that after the restoration settings.arguments will have `RestoredArguments` type (See [RestoredArguments](#restoredarguments)). Also nextPageInfo will NOT be null if there is any next route above this one. This may be usefull if you need a result of the next route. See [how should I get a result of the next route after the kill].
 
-### what is `RestoredArguments` for
+### RestoredArguments
 
 Flutter has a great feature in the navigation - you can wait for the next page result by using `await` keyword. And because when we restore the navigation stack we want to keep this ability we restore all routes with the new argument (`RestoredArguments`) class. This class has 2 fields: real page arguments and the next page information (`NextPageInfo`). See what can you do with it bellow.
 
