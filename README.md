@@ -21,7 +21,7 @@ You need to choose what way will you save your routes. Library has 2 build in wa
 2. For [Json](https://pub.dev/packages/json_serializable) see [json module](json_navigation_saver) instructions.
 3. Otherwise you will have to use [shared prefreferences module](shared_pref_navigation_saver) or [core module](navigation_saver) and write serialization yourself.
 
-## [Core module](navigation_saver)
+## Core module
 
 ### How does it work:
 
