@@ -17,7 +17,7 @@ This package listen for all your navigation events and save them. On the applica
 	b. [Json Serializable](https://pub.dev/packages/json_serializable) way of saving is located in the [json module](json_navigation_saver)
 
 
-## [Core module](navigation_saver)
+## Core module
 
 ### How does it work:
 
