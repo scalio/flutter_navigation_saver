@@ -6,16 +6,20 @@ This library will help to restore navigation stack after application kill.
 
 Mobile devices have restricted amount of memory they can use. That means if you open an other application the OS may want to clear resources and kill your application. In such case Flutter does nothing: application will run from the start point and all navigation stack and all widget's states will be cleared. See [issue](https://github.com/flutter/flutter/issues/6827)
 
-## What does this package do
+## Library restrictions
 
-This package listen for all your navigation events and save them. On the application start up it restores previous back stack or launch default route for your application. For the biggest customization abilities this library is splitted into the modules.
+Flutter uses [Navigator](https://api.flutter.dev/flutter/widgets/Navigator-class.html) for navigation. You can read more [here](https://flutter.dev/docs/development/ui/navigation). This library uses [named routes](https://flutter.dev/docs/cookbook/navigation/named-routes) for saving. So if you push any route without usage of named routes - this library will not help and that routes will never be restored.
 
-1. The main navigation related logic is located in the [core module](navigation_saver)
-2. The saving/restore logic to the shared preferences is located in the [shared prefreferences module](shared_pref_navigation_saver)
-3. Because Flutter does not have refrection you will need to save routes and there arguments by yourself, but we have some modules that will save your time in bollerplate:
-	a. [Built Value](https://pub.dev/packages/built_value) way of saving is located in the [built value module](built_value_navigation_saver)
-	b. [Json Serializable](https://pub.dev/packages/json_serializable) way of saving is located in the [json module](json_navigation_saver)
+## What does this library do
 
+This library listen for all your navigation events and save them. On the application start up it restores previous back stack or launch default route for your application. For the biggest customization abilities this library is splitted into the modules.
+
+## The easiest way to integrate
+
+You need to choose what way will you save your routes. Library has 2 build in ways:
+1. For [Built Value](https://pub.dev/packages/built_value) see [built value module](built_value_navigation_saver) instructions.
+2. For [Json](https://pub.dev/packages/json_serializable) see [json module](json_navigation_saver) instructions.
+3. Otherwise you will have to use [shared prefreferences module](shared_pref_navigation_saver) or [core module](navigation_saver) and write serialization yourself.
 
 ## [Core module](navigation_saver)
 
