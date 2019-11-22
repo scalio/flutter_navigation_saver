@@ -1,7 +1,9 @@
 library navigation_saver;
 
 import 'dart:async';
+import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pedantic/pedantic.dart';
@@ -47,20 +49,21 @@ class NavigationSaver extends NavigatorObserver {
 
   Route<dynamic> onGenerateRoute(
     RouteSettings routeSettings,
-    NavigationSaverRouteFactory routeFactory,
-  ) {
+    NavigationSaverRouteFactory routeFactory, {
+    WidgetBuilder restoreRouteWidgetBuilder,
+  }) {
     if (routeSettings.name == NavigationSaver.restoreRouteName) {
-      return MaterialPageRoute(
-        builder: (BuildContext context) => NavigationRestorationWidget(
-          navigationSaver: this,
-          child: Container(
-            alignment: AlignmentDirectional.center,
-            color: Colors.blue,
-            child: CircularProgressIndicator(),
-          ),
-        ),
-        settings: routeSettings,
-      );
+      final WidgetBuilder builder = (BuildContext context) => NavigationRestorationWidget(
+            navigationSaver: this,
+            child: null == restoreRouteWidgetBuilder
+                ? Container()
+                : restoreRouteWidgetBuilder(context),
+          );
+      if (Platform.isIOS) {
+        return CupertinoPageRoute(builder: builder, settings: routeSettings);
+      } else {
+        return MaterialPageRoute(builder: builder, settings: routeSettings);
+      }
     } else {
       final routeArguments = routeSettings.arguments;
       dynamic realArguments = routeArguments;
@@ -124,7 +127,7 @@ class NavigationSaver extends NavigatorObserver {
       }
     }).toList();
     Future(() async {
-      await Future.delayed(Duration(milliseconds: 10));
+      await Future.delayed(Duration(milliseconds: 500));
       if (localRoutesVersion == _routesVersion) {
         await _navigationRoutesSaver(localActiveRouteSettings);
       }
