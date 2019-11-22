@@ -1,10 +1,11 @@
 name: navigation_saver
-description: >
-  A new Flutter Navigation Saver package.
-version: 0.0.1
+version: 1.0.0
+description: >-
+  This library will help to restore navigation stack after application kill.
+homepage: https://github.com/scalio/flutter_navigation_saver
+documentation: https://github.com/scalio/flutter_navigation_saver
 authors:
   - Mikhail Gurevich <mig35@mig35.com>
-homepage:
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
