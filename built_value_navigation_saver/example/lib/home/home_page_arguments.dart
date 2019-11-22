@@ -3,15 +3,16 @@ import 'package:built_value/serializer.dart';
 
 part 'home_page_arguments.g.dart';
 
-abstract class MyHomePageArguments implements Built<MyHomePageArguments, MyHomePageArgumentsBuilder> {
+abstract class MyHomePageArguments
+    implements Built<MyHomePageArguments, MyHomePageArgumentsBuilder> {
+  MyHomePageArguments._();
 
- MyHomePageArguments._();
+  factory MyHomePageArguments([
+    void Function(MyHomePageArgumentsBuilder) updates,
+  ]) = _$MyHomePageArguments;
 
- factory MyHomePageArguments([
-  void Function(MyHomePageArgumentsBuilder) updates,
- ]) = _$MyHomePageArguments;
+  static Serializer<MyHomePageArguments> get serializer =>
+      _$myHomePageArgumentsSerializer;
 
- static Serializer<MyHomePageArguments> get serializer => _$myHomePageArgumentsSerializer;
-
- int get deepIndex;
+  int get deepIndex;
 }

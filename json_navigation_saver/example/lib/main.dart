@@ -9,8 +9,10 @@ import 'package:shared_pref_navigation_saver/shared_pref_navigatin_saver.dart';
 
 void main() {
   final NavigationSaver _navigatorSaver = SharedPrefNavigationSaver(
-    (Iterable<RouteSettings> routes) async => json.encode(serializeRoutes(routes)),
-    (String routesAsString) async => deserializeRoutes(json.decode(routesAsString)),
+    (Iterable<RouteSettings> routes) async =>
+        json.encode(serializeRoutes(routes)),
+    (String routesAsString) async =>
+        deserializeRoutes(json.decode(routesAsString)),
   );
 
   runApp(MyApp(_navigatorSaver));
@@ -29,7 +31,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: NavigationSaver.restoreRouteName,
-      onGenerateRoute: (RouteSettings routeSettings) => _navigationSaver.onGenerateRoute(
+      onGenerateRoute: (RouteSettings routeSettings) =>
+          _navigationSaver.onGenerateRoute(
         routeSettings,
         (
           RouteSettings settings, {
@@ -38,7 +41,9 @@ class MyApp extends StatelessWidget {
             MaterialPageRoute(
           builder: (BuildContext context) => MyHomePage(
             initialCounter: settings.arguments is Map
-                ? MyHomePageArguments.fromJson(settings.arguments as Map<String, dynamic>).deepIndex
+                ? MyHomePageArguments.fromJson(
+                        settings.arguments as Map<String, dynamic>)
+                    .deepIndex
                 : 0,
             nextPageInfo: nextPageInfo,
           ),

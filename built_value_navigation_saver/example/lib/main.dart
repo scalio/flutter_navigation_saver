@@ -11,8 +11,10 @@ import 'serializers.dart';
 
 void main() {
   final NavigationSaver _navigatorSaver = SharedPrefNavigationSaver(
-    (Iterable<RouteSettings> routes) async => json.encode(serializeRoutes(serializers, routes)),
-    (String routesAsString) async => deserializeRoutes(serializers, json.decode(routesAsString)),
+    (Iterable<RouteSettings> routes) async =>
+        json.encode(serializeRoutes(serializers, routes)),
+    (String routesAsString) async =>
+        deserializeRoutes(serializers, json.decode(routesAsString)),
   );
 
   runApp(MyApp(_navigatorSaver));
@@ -31,7 +33,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: NavigationSaver.restoreRouteName,
-      onGenerateRoute: (RouteSettings routeSettings) => _navigationSaver.onGenerateRoute(
+      onGenerateRoute: (RouteSettings routeSettings) =>
+          _navigationSaver.onGenerateRoute(
         routeSettings,
         (
           RouteSettings settings, {

@@ -64,7 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   awaitNextPageResult(
                     await Navigator.of(context).pushNamed(
                       "/next",
-                      arguments: MyHomePageArguments((b) => b..deepIndex = _counter * 100),
+                      arguments: MyHomePageArguments(
+                          (b) => b..deepIndex = _counter * 100),
                     ),
                   );
                 },

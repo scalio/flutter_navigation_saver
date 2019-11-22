@@ -19,7 +19,8 @@ class RoutesInfo {
     @required this.routes,
   });
 
-  factory RoutesInfo.fromJson(Map<String, dynamic> json) => _$RoutesInfoFromJson(json);
+  factory RoutesInfo.fromJson(Map<String, dynamic> json) =>
+      _$RoutesInfoFromJson(json);
 
   final List<NavigatorRouteSettings> routes;
 
@@ -40,7 +41,8 @@ class NavigatorRouteSettings {
   factory NavigatorRouteSettings.fromJson(Map<String, dynamic> json) =>
       _$NavigatorRouteSettingsFromJson(json);
 
-  factory NavigatorRouteSettings.fromSettings(widgets.RouteSettings routeSettings) =>
+  factory NavigatorRouteSettings.fromSettings(
+          widgets.RouteSettings routeSettings) =>
       NavigatorRouteSettings(
         name: routeSettings.name,
         isInitialRoute: routeSettings.isInitialRoute,
@@ -71,7 +73,8 @@ Iterable<NavigatorRouteSettings> convertToWidgetRouteSettings(
   Iterable<widgets.RouteSettings> routes,
 ) =>
     routes.map(
-      (widgets.RouteSettings routeSettings) => NavigatorRouteSettings.fromSettings(routeSettings),
+      (widgets.RouteSettings routeSettings) =>
+          NavigatorRouteSettings.fromSettings(routeSettings),
     );
 
 Iterable<widgets.RouteSettings> deserializeRoutes(

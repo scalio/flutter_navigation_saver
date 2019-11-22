@@ -59,7 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () async {
                   final result = await Navigator.of(context).pushNamed(
                     "/next",
-                    arguments: MyHomePageArguments(deepIndex: _counter * 100).toJson(),
+                    arguments:
+                        MyHomePageArguments(deepIndex: _counter * 100).toJson(),
                   );
                   onNextPageResult(result);
                 },

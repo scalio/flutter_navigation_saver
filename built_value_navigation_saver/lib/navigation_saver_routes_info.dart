@@ -26,7 +26,8 @@ abstract class NavigatorRouteSettings
     void Function(NavigatorRouteSettingsBuilder) updates,
   ]) = _$NavigatorRouteSettings;
 
-  factory NavigatorRouteSettings.fromSettings(widgets.RouteSettings routeSettings) =>
+  factory NavigatorRouteSettings.fromSettings(
+          widgets.RouteSettings routeSettings) =>
       NavigatorRouteSettings(
         (b) => b
           ..name = routeSettings.name
@@ -36,7 +37,8 @@ abstract class NavigatorRouteSettings
               : routeSettings.arguments,
       );
 
-  static Serializer<NavigatorRouteSettings> get serializer => _$navigatorRouteSettingsSerializer;
+  static Serializer<NavigatorRouteSettings> get serializer =>
+      _$navigatorRouteSettingsSerializer;
 
   String get name;
 
@@ -59,8 +61,9 @@ Object serializeRoutes(
     serializers.serializeWith(
       RoutesInfo.serializer,
       RoutesInfo(
-        (b) =>
-            b..routes = ListBuilder<NavigatorRouteSettings>(convertToWidgetRouteSettings(routes)),
+        (b) => b
+          ..routes = ListBuilder<NavigatorRouteSettings>(
+              convertToWidgetRouteSettings(routes)),
       ),
     );
 
@@ -68,7 +71,8 @@ Iterable<NavigatorRouteSettings> convertToWidgetRouteSettings(
   Iterable<widgets.RouteSettings> routes,
 ) =>
     routes.map(
-      (widgets.RouteSettings routeSettings) => NavigatorRouteSettings.fromSettings(routeSettings),
+      (widgets.RouteSettings routeSettings) =>
+          NavigatorRouteSettings.fromSettings(routeSettings),
     );
 
 Iterable<widgets.RouteSettings> deserializeRoutes(
