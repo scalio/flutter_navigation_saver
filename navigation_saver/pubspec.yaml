@@ -4,6 +4,7 @@ description: >-
   This library will help to restore navigation stack after application kill.
 homepage: https://github.com/scalio/flutter_navigation_saver
 documentation: https://github.com/scalio/flutter_navigation_saver/tree/master/navigation_saver
+issue_tracker: https://github.com/scalio/flutter_navigation_saver/issues
 authors:
   - Mikhail Gurevich <mig35@mig35.com>
 

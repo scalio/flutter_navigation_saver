@@ -4,6 +4,7 @@ description: >-
   This library is a helper library for converting routes with arguments to a string.
 homepage: https://github.com/scalio/flutter_navigation_saver
 documentation: https://github.com/scalio/flutter_navigation_saver/tree/master/json_navigation_saver
+issue_tracker: https://github.com/scalio/flutter_navigation_saver/issues
 authors:
   - Mikhail Gurevich <mig35@mig35.com>
 
