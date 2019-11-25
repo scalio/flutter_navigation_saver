@@ -8,28 +8,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pedantic/pedantic.dart';
 
-typedef NavigationRoutesSaver = Future<void> Function(
-    Iterable<RouteSettings> activeRoutes);
+/// will be called to save passed routes
+typedef NavigationRoutesSaver = Future<void> Function(Iterable<RouteSettings> activeRoutes);
+
+/// will be called to restore previous routes
 typedef NavigationRoutesRestorer = Future<Iterable<RouteSettings>> Function();
 
-typedef WidgetRouteGenerator = Route<dynamic> Function(
-    RouteSettings routeSettings);
+/// will be called to create application route from settings
 typedef NavigationSaverRouteFactory = Route<dynamic> Function(
   RouteSettings settings, {
   NextPageInfo nextPageInfo,
 });
 
+///
+/// This is the core class of the navigation saver logic.
+///
+/// The main functions of this class:
+/// 1. Observe all route changes and fire save event with appropriate route settings.
+/// 2. Restore all the navigation stack after the command. See [restorePreviousRoutes].
+/// 3. Have helper method to extract library route settings to the application level route settings. See [onGenerateRoute].
+///
+///
 class NavigationSaver extends NavigatorObserver {
   NavigationSaver(
     this._navigationRoutesSaver,
     this._navigationRoutesRestorer, {
     String defaultNavigationRoute,
-  })  : assert(null != _navigationRoutesSaver,
-            'navigationRoutesSaver should not ne null'),
-        assert(null != _navigationRoutesRestorer,
-            'navigationRoutesRestorer should not ne null'),
-        this._defaultNavigationRoute =
-            defaultNavigationRoute ?? Navigator.defaultRouteName;
+  })  : assert(null != _navigationRoutesSaver, 'navigationRoutesSaver should not ne null'),
+        assert(null != _navigationRoutesRestorer, 'navigationRoutesRestorer should not ne null'),
+        this._defaultNavigationRoute = defaultNavigationRoute ?? Navigator.defaultRouteName;
 
   static final String restoreRouteName = 'navigationSaverRestore';
 
@@ -41,9 +48,12 @@ class NavigationSaver extends NavigatorObserver {
   int _routesVersion = 0;
   final List<Route<dynamic>> _activeRoutes = <Route<dynamic>>[];
 
+  /// Call this method from the initial widget to move your app to the root widget
+  /// or restore previous navigation stack.
+  ///
+  /// Usually you shouldn't use it directly. Only [NavigationRestorationWidget] usually use it.
   Future<void> restorePreviousRoutes(BuildContext context) async {
-    final Iterable<RouteSettings> routeSettings =
-        await _navigationRoutesRestorer();
+    final Iterable<RouteSettings> routeSettings = await _navigationRoutesRestorer();
     if (null == routeSettings) {
       throw ArgumentError.notNull('routeSettings');
     }
@@ -51,19 +61,25 @@ class NavigationSaver extends NavigatorObserver {
     _restoreRoutesInternal(context, routeSettings.toList());
   }
 
+  /// This method handles route with name [NavigationSaver.restoreRouteName]
+  /// and pushes [NavigationRestorationWidget] to restore navigation stack.
+  /// Otherwise this method will convert route settings
+  /// and split them if it is an instance of [RestoredArguments] class.
+  ///
+  /// If you want to have your own content for the restoration time to show on the screen.
+  /// Just pass `restoreRouteWidgetBuilder` argument here.
   Route<dynamic> onGenerateRoute(
     RouteSettings routeSettings,
     NavigationSaverRouteFactory routeFactory, {
     WidgetBuilder restoreRouteWidgetBuilder,
   }) {
     if (routeSettings.name == NavigationSaver.restoreRouteName) {
-      final WidgetBuilder builder =
-          (BuildContext context) => NavigationRestorationWidget(
-                navigationSaver: this,
-                child: null == restoreRouteWidgetBuilder
-                    ? Container()
-                    : restoreRouteWidgetBuilder(context),
-              );
+      final WidgetBuilder builder = (BuildContext context) => NavigationRestorationWidget(
+            navigationSaver: this,
+            child: null == restoreRouteWidgetBuilder
+                ? Container()
+                : restoreRouteWidgetBuilder(context),
+          );
       if (Platform.isIOS) {
         return CupertinoPageRoute(builder: builder, settings: routeSettings);
       } else {
@@ -142,8 +158,7 @@ class NavigationSaver extends NavigatorObserver {
     });
   }
 
-  void _restoreRoutesInternal(
-      BuildContext context, List<RouteSettings> routeSettings) {
+  void _restoreRoutesInternal(BuildContext context, List<RouteSettings> routeSettings) {
     final NavigatorState navigator = Navigator.of(context);
     while (navigator.canPop()) {
       navigator.pop();
@@ -163,13 +178,11 @@ class NavigationSaver extends NavigatorObserver {
         final RestoredArguments arguments = RestoredArguments(
           null == nextRouteSetting
               ? null
-              : NextPageInfo(
-                  nextRouteSetting.name, currentRouteCompleter.future),
+              : NextPageInfo(nextRouteSetting.name, currentRouteCompleter.future),
           routeSetting.arguments,
         );
         if (i == 0) {
-          navigator.pushReplacementNamed(routeSetting.name,
-              arguments: arguments);
+          navigator.pushReplacementNamed(routeSetting.name, arguments: arguments);
         } else {
           _waitForTheResultAndPublishAsLost(
             () => navigator.pushNamed(routeSetting.name, arguments: arguments),
@@ -192,19 +205,7 @@ class NavigationSaver extends NavigatorObserver {
   }
 }
 
-class NavigationRestorationWidget extends StatefulWidget {
-  NavigationRestorationWidget({
-    @required this.navigationSaver,
-    @required this.child,
-  });
-
-  final NavigationSaver navigationSaver;
-  final Widget child;
-
-  @override
-  State<StatefulWidget> createState() => _NavigationRestorationState();
-}
-
+/// Arguments that will be used for all restored routes
 @immutable
 class RestoredArguments {
   const RestoredArguments(
@@ -212,10 +213,15 @@ class RestoredArguments {
     this.arguments,
   );
 
+  /// Not null if there is any next route after the current.
+  /// Contains information about the next route.
   final NextPageInfo nextPageInfo;
+
+  /// Original route arguments
   final Object arguments;
 }
 
+/// Class that represents the next route.
 @immutable
 class NextPageInfo {
   const NextPageInfo(
@@ -223,8 +229,29 @@ class NextPageInfo {
     this.resultFuture,
   );
 
+  /// route name like [RouteSettings.name]
   final String routeName;
+
+  /// route result future like [Route.popped]
   final Future resultFuture;
+}
+
+/// This widget will call [NavigationSaver.restoreRouteWidgetBuilder] in its init method
+/// and show the `child` during its life.
+class NavigationRestorationWidget extends StatefulWidget {
+  NavigationRestorationWidget({
+    @required this.navigationSaver,
+    @required this.child,
+  });
+
+  /// Liked navigation saver class
+  final NavigationSaver navigationSaver;
+
+  /// Widget to show
+  final Widget child;
+
+  @override
+  State<StatefulWidget> createState() => _NavigationRestorationState();
 }
 
 class _NavigationRestorationState extends State<NavigationRestorationWidget> {
