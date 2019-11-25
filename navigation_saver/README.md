@@ -4,13 +4,13 @@ This library will help to restore navigation stack after application kill.
 
 ## Overview
 
-This is the core library and usually shoudn't be used directly. Please check [general readme](../../../) first. It should be used directly only if you would like have a full control of how routes are saved and restored.
+This is the core library and usually shouldn't be used directly. Please check [general readme](../../../) first. It should be used directly only if you would like have a full control of how routes are saved and restored.
 
 ## How to use this library:
 
 1. Be sure that you need exactly this core library. Perhaps it is better to use [shared prefreferences module](../../../shared_pref_navigation_saver).
 2. Include dependencies:
-  a. `navigation_saver: ^1.0.0`   - current module
+  `navigation_saver: ^0.1.0`   - current module
 3. Include any argument to disk saving library or write it by yourself: [built value module](../../../built_value_navigation_saver) or [json module](../../../json_navigation_saver)
 4. Create `NavigationSaver` class before your application widget:
 ```
@@ -126,7 +126,7 @@ class AWidget extends StatefulWidget {
 
 ```
   awaitNextPageResult(
-    await Navigator.of(context).pushNamed(
+    Navigator.of(context).pushNamed(
       "/next",
       arguments: SomeArgs(),
     ),
