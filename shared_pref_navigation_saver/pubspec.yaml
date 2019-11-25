@@ -15,8 +15,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  navigation_saver:
-    path: ../navigation_saver
+  navigation_saver: ^0.1.0
   shared_preferences: ^0.5.0
 
 dev_dependencies:
@@ -25,10 +24,6 @@ dev_dependencies:
   pedantic: ^1.7.0
   build_runner: ^1.0.0
   built_value_generator: ^6.0.0
-
-dependency_overrides:
-  navigation_saver:
-    path: ../navigation_saver
 
 
 # For information on the generic Dart part of this file, see the
