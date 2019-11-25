@@ -5,7 +5,7 @@ This library will help to restore navigation stack after application kill.
 ## Overview
 
 This library should be used if you want to convert argument classes to string by using [built value](https://pub.dev/packages/built_value) library. Our library has helper classes that will remove most of bollerplate code.
-This library works best with [shared prefreferences module](../../../shared_pref_navigation_saver)
+This library works best with [shared prefreferences module](../shared_pref_navigation_saver)
 
 
 ## How to use this library:
