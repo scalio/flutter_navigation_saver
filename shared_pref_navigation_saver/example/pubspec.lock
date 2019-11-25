@@ -66,7 +66,7 @@ packages:
       name: navigation_saver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.0+3"
   path:
     dependency: transitive
     description:
@@ -94,7 +94,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.1.0+1"
+    version: "0.1.0+2"
   shared_preferences:
     dependency: transitive
     description:
