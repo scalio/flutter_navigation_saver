@@ -59,9 +59,13 @@ class MyApp extends StatelessWidget {
 3. `defaultNavigationRoute` parameter is used to when there is no routes to restore and this route will be pushed in that case. Default value is `Navigator.defaultRouteName`.
 4. `restorePreviousRoutes` method that will clear all current navigation stack and replace it with the restored state. This method should be called only in the application launch.
 5. `onGenerateRoute` method that will check passed route settings and decide the way how it should be handled. Currently we have only 2 ways:
+	
 	a. If the name of the route is `NavigationSaver.restoreRouteName` - library will push custom widget that will call `restorePreviousRoutes`. You may want to customize how does it look like by passing `restoreRouteWidgetBuilder` parameter.
+	
 	b. In all other cases library will check it the route arguments are from the restoration pushing or not.
+		
 		a. If this route was pushed by the client code (not the restoration), then it will call `NavigationSaverRouteFactory` with passed settings, routeName = settings.name and routeArguments = settings.arguments. Also nextPageInfo will be null.
+		
 		b. If this route was pushed by the restoration logic, then it will call `NavigationSaverRouteFactory` with passed settings, routeName = settings.name and routeArguments = restoredRouteArguments (note that after the restoration settings.arguments will have `RestoredArguments` type (See [RestoredArguments](#restoredarguments)). Also nextPageInfo will NOT be null if there is any next route above this one. This may be usefull if you need a result of the next route. See [how should I get a result of the next route after the kill].
 
 ## RestoredArguments
