@@ -9,7 +9,7 @@ This library should be used if you have some special way of serializing argument
 
 ## How does this module work:
 
-1. It uses the [core module](../../../navigation_saver) and extends it to save routes to the [shared preferences](https://pub.dev/packages/shared_preferences).
+1. It uses the [core module](../navigation_saver) and extends it to save routes to the [shared preferences](https://pub.dev/packages/shared_preferences).
 2. All the control of converting routes to string is up to the application user code.
 3. `maximumDurationBetweenRestoration` is used to understand if we need to restore routes or too much time was passed. Default is 5 minutes.
 
@@ -17,7 +17,7 @@ This library should be used if you have some special way of serializing argument
 
 1. Include dependencies:
   `shared_pref_navigation_saver: ^0.2.0`   - current module
-2. Include any argument to disk saving library or write it by yourself: [built value module](../../../built_value_navigation_saver) or [json module](../../../json_navigation_saver)
+2. Include any argument to disk saving library or write it by yourself: [built value module](../built_value_navigation_saver) or [json module](../json_navigation_saver)
 3. Create `NavigationSaver` class before your application widget:
 ```
 void main() {
