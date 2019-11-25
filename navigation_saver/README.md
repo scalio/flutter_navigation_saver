@@ -10,7 +10,7 @@ This is the core library and usually shouldn't be used directly. Please check [g
 
 1. Be sure that you need exactly this core library. Perhaps it is better to use [shared prefreferences module](../../../shared_pref_navigation_saver).
 2. Include dependencies:
-  `navigation_saver: ^0.1.0`   - current module
+  `navigation_saver: ^0.2.0`   - current module
 3. Include any argument to disk saving library or write it by yourself: [built value module](../../../built_value_navigation_saver) or [json module](../../../json_navigation_saver)
 4. Create `NavigationSaver` class before your application widget:
 ```
@@ -64,9 +64,9 @@ class MyApp extends StatelessWidget {
 	
 	b. In all other cases library will check it the route arguments are from the restoration pushing or not.
 		
-		a. If this route was pushed by the client code (not the restoration), then it will call `NavigationSaverRouteFactory` with passed settings, routeName = settings.name and routeArguments = settings.arguments. Also nextPageInfo will be null.
+	ba. If this route was pushed by the client code (not the restoration), then it will call `NavigationSaverRouteFactory` with passed settings, routeName = settings.name and routeArguments = settings.arguments. Also nextPageInfo will be null.
 		
-		b. If this route was pushed by the restoration logic, then it will call `NavigationSaverRouteFactory` with passed settings, routeName = settings.name and routeArguments = restoredRouteArguments (note that after the restoration settings.arguments will have `RestoredArguments` type (See [RestoredArguments](#restoredarguments)). Also nextPageInfo will NOT be null if there is any next route above this one. This may be usefull if you need a result of the next route. See [how should I get a result of the next route after the kill].
+	bb. If this route was pushed by the restoration logic, then it will call `NavigationSaverRouteFactory` with passed settings, routeName = settings.name and routeArguments = restoredRouteArguments (note that after the restoration settings.arguments will have `RestoredArguments` type (See [RestoredArguments](#restoredarguments)). Also nextPageInfo will NOT be null if there is any next route above this one. This may be usefull if you need a result of the next route. See [how should I get a result of the next route after the kill].
 
 ## RestoredArguments
 
