@@ -84,7 +84,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.2.0"
   built_collection:
     dependency: transitive
     description:
@@ -297,7 +297,7 @@ packages:
       name: navigation_saver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0+3"
+    version: "0.2.0+1"
   node_interop:
     dependency: transitive
     description:
@@ -374,7 +374,7 @@ packages:
       path: "..\\..\\shared_pref_navigation_saver"
       relative: true
     source: path
-    version: "0.1.0+2"
+    version: "0.2.0"
   shared_preferences:
     dependency: transitive
     description:

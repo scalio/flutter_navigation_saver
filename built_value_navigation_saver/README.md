@@ -12,9 +12,9 @@ This library works best with [shared prefreferences module](../../../shared_pref
 
 1. Include dependencies:
         
-	a. `build_value_navigation_saver: ^1.0.0` 	- current module that will 
+	a. `build_value_navigation_saver: ^0.2.0` 	- current module that will 
         
-	b. `shared_pref_navigation_saver: ^1.0.0` 	- module that will do actial navigation saving and restoring logic
+	b. `shared_pref_navigation_saver: ^0.2.0` 	- module that will do actial navigation saving and restoring logic
         
 	c. `built_value: ^6.0.0`					- built value integration. for more information see this [link](https://pub.dev/packages/built_value)
 2. Include dev dependencies:
