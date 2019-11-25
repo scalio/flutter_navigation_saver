@@ -9,7 +9,8 @@ import 'package:flutter/widgets.dart';
 import 'package:pedantic/pedantic.dart';
 
 /// will be called to save passed routes
-typedef NavigationRoutesSaver = Future<void> Function(Iterable<RouteSettings> activeRoutes);
+typedef NavigationRoutesSaver = Future<void> Function(
+    Iterable<RouteSettings> activeRoutes);
 
 /// will be called to restore previous routes
 typedef NavigationRoutesRestorer = Future<Iterable<RouteSettings>> Function();
@@ -34,9 +35,12 @@ class NavigationSaver extends NavigatorObserver {
     this._navigationRoutesSaver,
     this._navigationRoutesRestorer, {
     String defaultNavigationRoute,
-  })  : assert(null != _navigationRoutesSaver, 'navigationRoutesSaver should not ne null'),
-        assert(null != _navigationRoutesRestorer, 'navigationRoutesRestorer should not ne null'),
-        this._defaultNavigationRoute = defaultNavigationRoute ?? Navigator.defaultRouteName;
+  })  : assert(null != _navigationRoutesSaver,
+            'navigationRoutesSaver should not ne null'),
+        assert(null != _navigationRoutesRestorer,
+            'navigationRoutesRestorer should not ne null'),
+        this._defaultNavigationRoute =
+            defaultNavigationRoute ?? Navigator.defaultRouteName;
 
   static final String restoreRouteName = 'navigationSaverRestore';
 
@@ -53,7 +57,8 @@ class NavigationSaver extends NavigatorObserver {
   ///
   /// Usually you shouldn't use it directly. Only [NavigationRestorationWidget] usually use it.
   Future<void> restorePreviousRoutes(BuildContext context) async {
-    final Iterable<RouteSettings> routeSettings = await _navigationRoutesRestorer();
+    final Iterable<RouteSettings> routeSettings =
+        await _navigationRoutesRestorer();
     if (null == routeSettings) {
       throw ArgumentError.notNull('routeSettings');
     }
@@ -74,12 +79,13 @@ class NavigationSaver extends NavigatorObserver {
     WidgetBuilder restoreRouteWidgetBuilder,
   }) {
     if (routeSettings.name == NavigationSaver.restoreRouteName) {
-      final WidgetBuilder builder = (BuildContext context) => NavigationRestorationWidget(
-            navigationSaver: this,
-            child: null == restoreRouteWidgetBuilder
-                ? Container()
-                : restoreRouteWidgetBuilder(context),
-          );
+      final WidgetBuilder builder =
+          (BuildContext context) => NavigationRestorationWidget(
+                navigationSaver: this,
+                child: null == restoreRouteWidgetBuilder
+                    ? Container()
+                    : restoreRouteWidgetBuilder(context),
+              );
       if (Platform.isIOS) {
         return CupertinoPageRoute(builder: builder, settings: routeSettings);
       } else {
@@ -158,7 +164,8 @@ class NavigationSaver extends NavigatorObserver {
     });
   }
 
-  void _restoreRoutesInternal(BuildContext context, List<RouteSettings> routeSettings) {
+  void _restoreRoutesInternal(
+      BuildContext context, List<RouteSettings> routeSettings) {
     final NavigatorState navigator = Navigator.of(context);
     while (navigator.canPop()) {
       navigator.pop();
@@ -178,11 +185,13 @@ class NavigationSaver extends NavigatorObserver {
         final RestoredArguments arguments = RestoredArguments(
           null == nextRouteSetting
               ? null
-              : NextPageInfo(nextRouteSetting.name, currentRouteCompleter.future),
+              : NextPageInfo(
+                  nextRouteSetting.name, currentRouteCompleter.future),
           routeSetting.arguments,
         );
         if (i == 0) {
-          navigator.pushReplacementNamed(routeSetting.name, arguments: arguments);
+          navigator.pushReplacementNamed(routeSetting.name,
+              arguments: arguments);
         } else {
           _waitForTheResultAndPublishAsLost(
             () => navigator.pushNamed(routeSetting.name, arguments: arguments),
