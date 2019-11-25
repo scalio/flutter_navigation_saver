@@ -8,10 +8,10 @@ This is the core library and usually shouldn't be used directly. Please check [g
 
 ## How to use this library:
 
-1. Be sure that you need exactly this core library. Perhaps it is better to use [shared prefreferences module](../../../shared_pref_navigation_saver).
+1. Be sure that you need exactly this core library. Perhaps it is better to use [shared prefreferences module](../shared_pref_navigation_saver).
 2. Include dependencies:
   `navigation_saver: ^0.2.0`   - current module
-3. Include any argument to disk saving library or write it by yourself: [built value module](../../../built_value_navigation_saver) or [json module](../../../json_navigation_saver)
+3. Include any argument to disk saving library or write it by yourself: [built value module](../built_value_navigation_saver) or [json module](../json_navigation_saver)
 4. Create `NavigationSaver` class before your application widget:
 ```
 void main() {

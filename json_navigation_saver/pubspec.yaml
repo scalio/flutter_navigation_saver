@@ -1,5 +1,5 @@
 name: json_navigation_saver
-version: 0.0.1
+version: 0.2.0
 description: >-
   This library is a helper library for converting routes with arguments to a string.
 homepage: https://github.com/scalio/flutter_navigation_saver
@@ -15,8 +15,7 @@ dependencies:
   flutter:
     sdk: flutter
   json_annotation: ^3.0.0
-  navigation_saver:
-    path: ../navigation_saver
+  navigation_saver: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -24,10 +23,6 @@ dev_dependencies:
   build_runner: ^1.0.0
   json_serializable: ^3.2.0
   pedantic: ^1.7.0
-
-dependency_overrides:
-  navigation_saver:
-    path: ../navigation_saver
 
 
 # For information on the generic Dart part of this file, see the

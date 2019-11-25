@@ -10,13 +10,13 @@ authors:
   - Mikhail Gurevich <mig35@mig35.com>
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   built_value: ^6.0.0
-  built_collection: ^4.2.2
+  built_collection: ^4.3.0
   navigation_saver: ^0.2.0
 
 dev_dependencies:

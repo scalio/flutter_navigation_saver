@@ -255,7 +255,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.2.0"
   json_serializable:
     dependency: "direct dev"
     description:
@@ -301,10 +301,10 @@ packages:
   navigation_saver:
     dependency: transitive
     description:
-      path: "..\\..\\navigation_saver"
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: navigation_saver
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0+1"
   node_interop:
     dependency: transitive
     description:
@@ -381,7 +381,7 @@ packages:
       path: "..\\..\\shared_pref_navigation_saver"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.2.0"
   shared_preferences:
     dependency: transitive
     description:

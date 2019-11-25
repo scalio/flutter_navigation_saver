@@ -5,7 +5,7 @@ import 'package:example/home/home_page_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:json_navigation_saver/json_navigation_saver.dart';
 import 'package:navigation_saver/navigation_saver.dart';
-import 'package:shared_pref_navigation_saver/shared_pref_navigatin_saver.dart';
+import 'package:shared_pref_navigation_saver/shared_pref_navigation_saver.dart';
 
 void main() {
   final NavigationSaver _navigatorSaver = SharedPrefNavigationSaver(
