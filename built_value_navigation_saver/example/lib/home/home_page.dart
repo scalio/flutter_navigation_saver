@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
               RaisedButton(
                 onPressed: () async {
                   awaitNextPageResult(
-                    await Navigator.of(context).pushNamed(
+                    Navigator.of(context).pushNamed(
                       "/next",
                       arguments: MyHomePageArguments(
                           (b) => b..deepIndex = _counter * 100),

@@ -28,7 +28,11 @@ class _MyHomePageState extends State<MyHomePage> {
     _counter = widget.initialCounter;
 
     if (null != widget.nextPageInfo) {
-      awaitResult(widget.nextPageInfo.resultFuture);
+      switch (widget.nextPageInfo.routeName) {
+        case '/next':
+          awaitNextPageResult(widget.nextPageInfo.resultFuture);
+          break;
+      }
     }
   }
 
@@ -57,10 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               RaisedButton(
                 onPressed: () async {
-                  awaitResult(
+                  awaitNextPageResult(
                     Navigator.of(context).pushNamed(
                       "/next",
-                      arguments: MyHomePageArguments(deepIndex: _counter * 100).toJson(),
+                      arguments: MyHomePageArguments(_counter * 100),
                     ),
                   );
                 },
@@ -81,9 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
 
-  void awaitResult(Future resultFuture) async {
+  void awaitNextPageResult(Future resultFuture) async {
     final result = await resultFuture;
-
     if (null == result) return;
 
     _key.currentState
