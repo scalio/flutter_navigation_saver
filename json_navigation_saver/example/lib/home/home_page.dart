@@ -60,7 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   awaitResult(
                     Navigator.of(context).pushNamed(
                       "/next",
-                      arguments: MyHomePageArguments(deepIndex: _counter * 100).toJson(),
+                      arguments: MyHomePageArguments(deepIndex: _counter * 100)
+                          .toJson(),
                     ),
                   );
                 },
