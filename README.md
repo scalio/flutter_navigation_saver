@@ -1,6 +1,6 @@
 ![Flutter at Scalio](https://raw.githubusercontent.com/scalio/flutter/master/assets/scalio-fns.svg?sanitize=true)
 
-<h1 align="center">Flutter navigation saver library</h1>
+<h1 align="center">Flutter Navigation Saver</h1>
 
 <p align="center">
   A library to restore the navigation stack after application kill -- for <b><a href="https://flutter.dev/">Flutter</a></b>
