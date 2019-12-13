@@ -1,3 +1,9 @@
+![Flutter at Scalio](https://raw.githubusercontent.com/scalio/flutter/master/assets/circle-fns.svg?sanitize=true)
+
+# Flutter Overview
+<a href="https://flutter.dev/">Flutter</a> is Google’s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.
+<br><br>
+
 # Flutter navigation saver library
 
 This library will help to restore navigation stack after application kill.
@@ -102,3 +108,17 @@ class AWidget extends StatefulWidget {
     ),
   );
 ```
+
+
+## About Scalio
+<p>
+Scalio is a global digital product agency advancing technology for the world's leading companies. We design, build and scale high-usability, high-performance custom software for phones, tablets, AR, wearables, connected devices, & emerging technologies. Rooted in San Francisco, we've worked at and for Silicon Valley's top companies, helping to create and evangelize bleeding edge technologies. We're a team of engineers and artists who've developed systems, services, applications and platforms -- scaled for and used daily by millions of people. 
+</p>
+
+<p align="center">
+    <br/>
+    <a href="https://scal.io/">
+        <img src="https://raw.githubusercontent.com/scalio/flutter/master/assets/scalio-logo.svg?sanitize=true" />
+    </a>
+    <br/>
+</p>
