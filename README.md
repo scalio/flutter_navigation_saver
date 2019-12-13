@@ -1,14 +1,14 @@
-![Flutter at Scalio](https://raw.githubusercontent.com/scalio/flutter/master/assets/circle-fns.svg?sanitize=true)
+![Flutter at Scalio](https://raw.githubusercontent.com/scalio/flutter/master/assets/scalio-fns.svg?sanitize=true)
 
-# Flutter Overview
-<a href="https://flutter.dev/">Flutter</a> is Google’s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.
-<br><br>
+<h1 align="center">Flutter navigation saver library</h1>
 
-# Flutter navigation saver library
+<p align="center">
+  A library to restore the navigation stack after application kill -- for <b><a href="https://flutter.dev/">Flutter</a></b>
+</p>
 
-This library will help to restore navigation stack after application kill.
+&nbsp;
 
-## Why would you like to use it
+## Why you'd use it
 
 Mobile devices have restricted amount of memory they can use. That means if you open an other application the OS may want to clear resources and kill your application. In such case Flutter does nothing: application will run from the start point and all navigation stack and all widget's states will be cleared. See [issue](https://github.com/flutter/flutter/issues/6827)
 
@@ -109,11 +109,7 @@ class AWidget extends StatefulWidget {
   );
 ```
 
-
 ## About Scalio
-<p>
-Scalio is a global digital product agency advancing technology for the world's leading companies. We design, build and scale high-usability, high-performance custom software for phones, tablets, AR, wearables, connected devices, & emerging technologies. Rooted in San Francisco, we've worked at and for Silicon Valley's top companies, helping to create and evangelize bleeding edge technologies. We're a team of engineers and artists who've developed systems, services, applications and platforms -- scaled for and used daily by millions of people. 
-</p>
 
 <p align="center">
     <br/>
