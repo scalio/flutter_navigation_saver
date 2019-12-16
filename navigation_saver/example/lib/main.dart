@@ -26,22 +26,23 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: NavigationSaver.restoreRouteName,
-      onGenerateRoute: (RouteSettings routeSettings) => _navigationSaver.onGenerateRoute(
-        routeSettings,
-        (
-          RouteSettings settings, {
-          NextPageInfo nextPageInfo,
-        }) =>
-            MaterialPageRoute(
-          builder: (BuildContext context) => MyHomePage(
-            initialCounter: settings.arguments is MyHomePageArguments
-                ? (settings.arguments as MyHomePageArguments).deepIndex
-                : 0,
-            nextPageInfo: nextPageInfo,
-          ),
-          settings: routeSettings,
-        ),
-      ),
+      onGenerateRoute: (RouteSettings routeSettings) =>
+          _navigationSaver.onGenerateRoute(
+              routeSettings,
+              (
+                RouteSettings settings, {
+                NextPageInfo nextPageInfo,
+              }) =>
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => MyHomePage(
+                      initialCounter: settings.arguments is MyHomePageArguments
+                          ? (settings.arguments as MyHomePageArguments)
+                              .deepIndex
+                          : 0,
+                      nextPageInfo: nextPageInfo,
+                    ),
+                    settings: routeSettings,
+                  )),
       navigatorObservers: [_navigationSaver],
     );
   }
