@@ -4,8 +4,8 @@ This library will help to restore navigation stack after application kill.
 
 ## Overview
 
-This library should be used if you want to convert argument classes to string by using [built value](https://pub.dev/packages/built_value) library. Our library has helper classes that will remove most of bollerplate code.
-This library works best with [shared prefreferences module](../shared_pref_navigation_saver)
+This library should be used if you want to convert argument classes to string by using [built value](https://pub.dev/packages/built_value) library. Our library has helper classes that will remove most of boilerplate code.
+This library works best with `shared prefreferences module` [github link](../shared_pref_navigation_saver) or [pub link](https://pub.dev/packages/shared_pref_navigation_saver).
 
 
 ## How to use this library:
@@ -14,14 +14,14 @@ This library works best with [shared prefreferences module](../shared_pref_navig
         
 	a. `build_value_navigation_saver: ^0.2.0` 	- current module that will 
         
-	b. `shared_pref_navigation_saver: ^0.2.0` 	- module that will do actial navigation saving and restoring logic
+	b. `shared_pref_navigation_saver: ^0.2.0` 	- module that will do actual navigation saving and restoring logic
         
-	c. `built_value: ^6.0.0`					- built value integration. for more information see this [link](https://pub.dev/packages/built_value)
+	c. `built_value: ^7.0.0`					- built value integration. for more information see this [link](https://pub.dev/packages/built_value)
 2. Include dev dependencies:
 	
 	a. `build_runner: ^1.0.0`					- built value integration. for more information see this [link](https://pub.dev/packages/built_value)
 	
-	b. `built_value_generator: ^6.0.0`			- built value integration. for more information see this [link](https://pub.dev/packages/built_value)
+	b. `built_value_generator: ^7.0.0`			- built value integration. for more information see this [link](https://pub.dev/packages/built_value)
 3. Create `NavigationSaver` class before your application widget:
 ```
 import 'serializers.dart';
