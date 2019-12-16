@@ -10,9 +10,9 @@ This is the core library and usually shouldn't be used directly. Please check [g
 
 1. Be sure that you need exactly this core library. It has just base logic and all other big things like saving and restoring routes and arguments you will have to do by yourself.
 
-Please check built value module ([githib link](../built_value_navigation_saver) or [pub link](https://pub.dev/packages/build_value_navigation_saver)) or json module ([github link](../json_navigation_saver) or [pub link](https://pub.dev/packages/json_navigation_saver)) for argument to map converting logic.
+Please check `built value module` ([githib link](../built_value_navigation_saver) or [pub link](https://pub.dev/packages/build_value_navigation_saver)) or `json module` ([github link](../json_navigation_saver) or [pub link](https://pub.dev/packages/json_navigation_saver)) for argument to map converting logic.
 
-Please check shared prefreferences module ([github link](../shared_pref_navigation_saver) or [pub link](https://pub.dev/packages/shared_pref_navigation_saver)) for disk saving logic.
+Please check `shared prefreferences` module ([github link](../shared_pref_navigation_saver) or [pub link](https://pub.dev/packages/shared_pref_navigation_saver)) for disk saving logic.
   
 2. If you still want to use this core library directly - include dependency:
   `navigation_saver: ^0.2.0`   - current module
