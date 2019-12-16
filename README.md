@@ -1,8 +1,14 @@
-# Flutter navigation saver library
+![Flutter at Scalio](https://raw.githubusercontent.com/scalio/flutter/master/assets/scalio-fns.svg?sanitize=true)
 
-This library will help to restore navigation stack after application kill.
+<h1 align="center">Flutter Navigation Saver</h1>
 
-## Why would you like to use it
+<p align="center">
+  A library to restore the navigation stack after application kill -- for <b><a href="https://flutter.dev/">Flutter</a></b>
+</p>
+
+&nbsp;
+
+## Why you'd use it
 
 Mobile devices have restricted amount of memory they can use. That means if you open an other application the OS may want to clear resources and kill your application. In such case Flutter does nothing: application will run from the start point and all navigation stack and all widget's states will be cleared. See [issue](https://github.com/flutter/flutter/issues/6827)
 
@@ -102,3 +108,13 @@ class AWidget extends StatefulWidget {
     ),
   );
 ```
+
+## About Scalio
+
+<p align="center">
+    <br/>
+    <a href="https://scal.io/">
+        <img src="https://raw.githubusercontent.com/scalio/flutter/master/assets/scalio-logo.svg?sanitize=true" />
+    </a>
+    <br/>
+</p>
