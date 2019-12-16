@@ -8,11 +8,12 @@ This is the core library and usually shouldn't be used directly. Please check [g
 
 ## How to use this library:
 
-1. Be sure that you need exactly this core library. Perhaps it is better to use [shared prefreferences module](../shared_pref_navigation_saver).
-2. Include dependencies:
+1. Be sure that you need exactly this core library. It has just base logic and all other big things like saving and restoring routes and arguments you will have to do by yourself.
+Please check [built value module](../built_value_navigation_saver) ([pub link](https://pub.dev/packages/build_value_navigation_saver)) or [json module](../json_navigation_saver) ([pub link](https://pub.dev/packages/json_navigation_saver)) for argument to map converting logic.
+Please check [shared prefreferences module](../shared_pref_navigation_saver) ([pub link](https://pub.dev/packages/shared_pref_navigation_saver)) for disk saving logic.  
+2. If you still want to use this core library directly - include dependency:
   `navigation_saver: ^0.2.0`   - current module
-3. Include any argument to disk saving library or write it by yourself: [built value module](../built_value_navigation_saver) or [json module](../json_navigation_saver)
-4. Create `NavigationSaver` class before your application widget:
+3. Create `NavigationSaver` class before your application widget:
 ```
 void main() {
   final NavigationSaver _navigatorSaver = NavigationSaver(
@@ -24,7 +25,7 @@ void main() {
 }
 
 ```
-5. Setup `NavigationSaver` as navigation observer and make him generate widgets:
+4. Setup `NavigationSaver` as navigation observer and route generator:
 ```
 class MyApp extends StatelessWidget {
   MyApp(this._navigationSaver);
@@ -49,14 +50,14 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
-6. This is it. Also you may want to add custom restoration widget that will be shown when library restore your navigation stack. This can be done by passing `restoreRouteWidgetBuilder` paramter to `onGenerateRoute` method.
+5. This is it. Also you may want to add custom restoration widget that will be shown when library restore your navigation stack. This can be done by passing `restoreRouteWidgetBuilder` parameter in `onGenerateRoute` method.
 
 
 ## How does core module work:
 
 1. Saves application navigation stack to the class field by implementing [NavigatorObserver](https://api.flutter.dev/flutter/widgets/NavigatorObserver-class.html)
 2. Fires save routes callback when user stays on this route for some time.
-3. `defaultNavigationRoute` parameter is used to when there is no routes to restore and this route will be pushed in that case. Default value is `Navigator.defaultRouteName`.
+3. `defaultNavigationRoute` parameter is used when there is no routes to restore and this route will be pushed in that case. Default value is `Navigator.defaultRouteName`.
 4. `restorePreviousRoutes` method that will clear all current navigation stack and replace it with the restored state. This method should be called only in the application launch.
 5. `onGenerateRoute` method that will check passed route settings and decide the way how it should be handled. Currently we have only 2 ways:
 	

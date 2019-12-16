@@ -26,8 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: NavigationSaver.restoreRouteName,
-      onGenerateRoute: (RouteSettings routeSettings) =>
-          _navigationSaver.onGenerateRoute(
+      onGenerateRoute: (RouteSettings routeSettings) => _navigationSaver.onGenerateRoute(
         routeSettings,
         (
           RouteSettings settings, {
