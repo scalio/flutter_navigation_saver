@@ -12,7 +12,7 @@ This library works best with `shared prefreferences module` [github link](../sha
 
 1. Include dependencies:
         
-	a. `build_value_navigation_saver: ^0.2.0` 	- current module that will 
+	a. `build_value_navigation_saver: ^0.2.0` 	- current module that includes core navigation saver library ([github link](../navigation_saver) or [pub link](https://pub.dev/packages/navigation_saver)) with build value support.
         
 	b. `shared_pref_navigation_saver: ^0.2.0` 	- module that will do actual navigation saving and restoring logic
         
