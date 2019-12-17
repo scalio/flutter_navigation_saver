@@ -32,7 +32,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^1.0.0
   json_serializable: ^3.2.0
-  pedantic: ^1.7.0
+  pedantic: ^1.0.0
 
 dependency_overrides:
   json_navigation_saver:
