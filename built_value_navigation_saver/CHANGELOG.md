@@ -1,3 +1,7 @@
+## [0.2.1] - 22.11.2019
+
+* Read.me update
+
 ## [0.2.0+2] - 22.11.2019
 
 * Built Value dependencies update
