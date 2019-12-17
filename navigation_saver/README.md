@@ -18,6 +18,9 @@ Please check `shared prefreferences` module ([github link](../shared_pref_naviga
   `navigation_saver: ^0.2.0`   - current module
 3. Create `NavigationSaver` class before your application widget:
 ```
+import 'package:build_value_navigation_saver/navigation_saver_routes_info.dart';
+import 'package:shared_pref_navigation_saver/shared_pref_navigation_saver.dart';
+
 void main() {
   final NavigationSaver _navigatorSaver = NavigationSaver(
     (routes) async => /* todo: add save code */,
@@ -54,7 +57,7 @@ class MyApp extends StatelessWidget {
 }
 ```
 5. This is it. Also you may want to add custom restoration widget that will be shown when library restore your navigation stack. This can be done by passing `restoreRouteWidgetBuilder` parameter in `onGenerateRoute` method.
-
+6. You may want to add custom restoration widget that will be shown when library restore your navigation stack. This can be done by passing `restoreRouteWidgetBuilder` parameter in `onGenerateRoute` method.
 
 ## How does core module work:
 

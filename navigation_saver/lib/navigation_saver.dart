@@ -69,13 +69,17 @@ class NavigationSaver extends NavigatorObserver {
   ///
   /// Usually you shouldn't use it directly. Only [NavigationRestorationWidget] usually use it.
   Future<void> restorePreviousRoutes(BuildContext context) async {
-    final Iterable<RouteSettings> routeSettings =
-        await _navigationRoutesRestorer();
-    if (null == routeSettings) {
-      throw ArgumentError.notNull('routeSettings');
-    }
+    try {
+      final Iterable<RouteSettings> routeSettings =
+          await _navigationRoutesRestorer();
+      if (null == routeSettings) {
+        throw ArgumentError.notNull('routeSettings');
+      }
 
-    _restoreRoutesInternal(context, routeSettings.toList());
+      _restoreRoutesInternal(context, routeSettings.toList());
+    } catch (e) {
+      debugPrint(e);
+    }
   }
 
   /// This method handles route with name [NavigationSaver.restoreRouteName]

@@ -1,4 +1,8 @@
-## [0.2.1] - 16.12.2019
+## [0.2.1+1] - 17.12.2019
+
+* Add error check on restoration
+
+## [0.2.1] - 17.12.2019
 
 * Add ability to start/stop saving logic.
 * Add better error handling and logging.
