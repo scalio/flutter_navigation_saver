@@ -92,7 +92,39 @@ class MyApp extends StatelessWidget {
 }
 ```
 8. You may want to add custom restoration widget that will be shown when library restore your navigation stack. This can be done by passing `restoreRouteWidgetBuilder` parameter in `onGenerateRoute` method.
-9. After that you should extend all your arguments from `Built` class and specify them in `serializers.dart` file. See build value library for additional instructions.
+9. After that you should extend all your arguments from `Built` class and specify them in `serializers.dart` file. See bellow code for instructions.
 10. To see how to get result from restored routes see note in the core library: [github](https://github.com/scalio/flutter_navigation_saver#restoredarguments) or [pub](https://pub.dev/packages/navigation_saver#restoredarguments)
+
+## How to use build value library
+
+1. Specify your argument class as abstract.
+2. Add `implements Built<ArgumentClassName, ArgumentClassNameBuilder>`.
+3. Add this code bellow imports and above class definition: 
+```
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+        
+part 'argument_class_name_file_name.g.dart';
+```
+4. Add additional code inside your class:
+```
+  factory ArgumentClassName([
+    void Function(ArgumentClassNameBuilder) updates,
+  ]) = _$ArgumentClassName;
+
+  ArgumentClassName._();
+
+  static Serializer<ArgumentClassName> get serializer =>
+      _$argumentClassNameSerializer;
+```  
+5. Change all final fields to getters. For example if you have `int field` change the code like this:
+from: `final int field;`
+to: `int get field;`
+6. It is better to have arguments class in a separate file because otherwise you will have to deal with naming conflicts (for example class in `Builder` is defined in `package:built_value/built_value.dart` and `package:flutter/widgets.dart`)
+7. Do not forget to call `flutter packages pub run build_runner build` after each argument update.
+
+
+See [build value library](https://pub.dev/packages/built_value) for additional instructions.
+
 
 For the complete example see an [example application](example)
