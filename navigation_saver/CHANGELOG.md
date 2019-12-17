@@ -1,3 +1,8 @@
+## [0.2.1] - 16.12.2019
+
+* Add ability to start/stop saving logic.
+* Add better error handling and logging.
+
 ## [0.2.0+3] - 16.12.2019
 
 * Read.me update

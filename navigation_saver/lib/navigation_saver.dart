@@ -35,22 +35,34 @@ class NavigationSaver extends NavigatorObserver {
     this._navigationRoutesSaver,
     this._navigationRoutesRestorer, {
     String defaultNavigationRoute,
+    bool autoStartStopLogic = true,
   })  : assert(null != _navigationRoutesSaver,
             'navigationRoutesSaver should not ne null'),
         assert(null != _navigationRoutesRestorer,
             'navigationRoutesRestorer should not ne null'),
+        assert(null != autoStartStopLogic,
+            'autoStartStopLogic should not ne null'),
         this._defaultNavigationRoute =
-            defaultNavigationRoute ?? Navigator.defaultRouteName;
+            defaultNavigationRoute ?? Navigator.defaultRouteName,
+        _autoStartStopLogic = autoStartStopLogic;
 
   static final String restoreRouteName = 'navigationSaverRestore';
 
   final NavigationRoutesSaver _navigationRoutesSaver;
   final NavigationRoutesRestorer _navigationRoutesRestorer;
 
+  /// route that will be used to start main application
   final String _defaultNavigationRoute;
+
+  /// used to auto subscribe to save/restore logic
+  final bool _autoStartStopLogic;
 
   int _routesVersion = 0;
   final List<Route<dynamic>> _activeRoutes = <Route<dynamic>>[];
+
+  final StreamController<_RoutesListInfo> _routesToSaveStreamController =
+      StreamController();
+  StreamSubscription _routesToSaveStreamSubscription;
 
   /// Call this method from the initial widget to move your app to the root widget
   /// or restore previous navigation stack.
@@ -110,6 +122,14 @@ class NavigationSaver extends NavigatorObserver {
     }
   }
 
+  void init() {
+    _subscribeToStream();
+  }
+
+  void dispose() {
+    _disposeStream();
+  }
+
   @override
   void didReplace({Route<dynamic> newRoute, Route<dynamic> oldRoute}) {
     _activeRoutes.remove(oldRoute);
@@ -130,17 +150,24 @@ class NavigationSaver extends NavigatorObserver {
     _activeRoutes.remove(route);
     _routesVersion++;
     _saveRoutes();
+
+    if (_activeRoutes.isEmpty && _autoStartStopLogic) {
+      _disposeStream();
+    }
   }
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
+    if (_activeRoutes.isEmpty && _autoStartStopLogic) {
+      _subscribeToStream();
+    }
+
     _activeRoutes.add(route);
     _routesVersion++;
     _saveRoutes();
   }
 
   void _saveRoutes() {
-    final int localRoutesVersion = _routesVersion;
     final List<RouteSettings> localActiveRouteSettings = _activeRoutes
         .map((Route route) => route.settings)
         .where((RouteSettings settings) => settings.name != null)
@@ -156,12 +183,8 @@ class NavigationSaver extends NavigatorObserver {
         return settings;
       }
     }).toList();
-    Future(() async {
-      await Future.delayed(Duration(milliseconds: 500));
-      if (localRoutesVersion == _routesVersion) {
-        await _navigationRoutesSaver(localActiveRouteSettings);
-      }
-    });
+    _routesToSaveStreamController.sink
+        .add(_RoutesListInfo(_routesVersion, localActiveRouteSettings));
   }
 
   void _restoreRoutesInternal(
@@ -211,6 +234,30 @@ class NavigationSaver extends NavigatorObserver {
   ) async {
     final result = await navigationAction();
     completer?.complete(result);
+  }
+
+  void _subscribeToStream() {
+    if (null == _routesToSaveStreamSubscription) {
+      _routesToSaveStreamSubscription = _routesToSaveStreamController.stream
+          .asyncMap((_RoutesListInfo info) async {
+        if (info.version == _routesVersion) {
+          await _navigationRoutesSaver(info.routes);
+        }
+      }).listen(
+        (_) {},
+        onError: (e, _) {
+          debugPrint('error happened during navigationRouteSaver call. $e');
+        },
+        cancelOnError: false,
+      );
+    }
+  }
+
+  void _disposeStream() {
+    if (null != _routesToSaveStreamSubscription) {
+      _routesToSaveStreamSubscription.cancel();
+      _routesToSaveStreamSubscription = null;
+    }
   }
 }
 
@@ -273,4 +320,15 @@ class _NavigationRestorationState extends State<NavigationRestorationWidget> {
 
   @override
   Widget build(BuildContext context) => widget.child;
+}
+
+@immutable
+class _RoutesListInfo {
+  const _RoutesListInfo(
+    this.version,
+    this.routes,
+  );
+
+  final int version;
+  final List<RouteSettings> routes;
 }
