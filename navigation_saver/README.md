@@ -15,7 +15,7 @@ Please check `built value module` ([githib link](../built_value_navigation_saver
 Please check `shared prefreferences` module ([github link](../shared_pref_navigation_saver) or [pub link](https://pub.dev/packages/shared_pref_navigation_saver)) for disk saving logic.
   
 2. If you still want to use this core library directly - include dependency:
-  `navigation_saver: ^0.3.2`   - current module
+  `navigation_saver: ^0.3.3`   - current module
 3. Create `NavigationSaver` class before your application widget:
 ```
 import 'package:build_value_navigation_saver/navigation_saver_routes_info.dart';

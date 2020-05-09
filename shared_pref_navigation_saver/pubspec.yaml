@@ -1,5 +1,5 @@
 name: shared_pref_navigation_saver
-version: 0.3.2
+version: 0.3.3
 description: >-
   This library will help to restore navigation stack after application kill.
 repository: https://github.com/scalio/flutter_navigation_saver
@@ -13,7 +13,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  navigation_saver: ^0.3.2
+  navigation_saver: ^0.3.3
   shared_preferences: ^0.5.0
 
 dev_dependencies:

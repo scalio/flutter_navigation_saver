@@ -12,9 +12,9 @@ This library works best with `shared prefreferences module` [github link](../sha
 
 1. Include dependencies:
 	
-	a. `build_value_navigation_saver: ^0.3.2` 	- current module that includes helper classes for build value integration.
+	a. `build_value_navigation_saver: ^0.3.3` 	- current module that includes helper classes for build value integration.
 
-	b. `shared_pref_navigation_saver: ^0.3.2` 	- module that will do actual navigation saving and restoring logic with core navigation saver library ([github link](../navigation_saver) or [pub link](https://pub.dev/packages/navigation_saver)).
+	b. `shared_pref_navigation_saver: ^0.3.3` 	- module that will do actual navigation saving and restoring logic with core navigation saver library ([github link](../navigation_saver) or [pub link](https://pub.dev/packages/navigation_saver)).
 	
 	c. `json_annotation: ^3.0.0`				- built value integration. for more information see this [link](https://pub.dev/packages/json_serializable)
 2. Include dev dependencies:
