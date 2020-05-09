@@ -23,7 +23,6 @@ NavigatorRouteSettings _$NavigatorRouteSettingsFromJson(
     Map<String, dynamic> json) {
   return NavigatorRouteSettings(
     name: json['name'] as String,
-    isInitialRoute: json['isInitialRoute'] as bool,
     arguments: json['arguments'] as Map<String, dynamic>,
   );
 }
@@ -32,6 +31,5 @@ Map<String, dynamic> _$NavigatorRouteSettingsToJson(
         NavigatorRouteSettings instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'isInitialRoute': instance.isInitialRoute,
       'arguments': instance.arguments,
     };

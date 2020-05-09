@@ -9,8 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:pedantic/pedantic.dart';
 
 /// will be called to save passed routes
-typedef NavigationRoutesSaver = Future<void> Function(
-    Iterable<RouteSettings> activeRoutes);
+typedef NavigationRoutesSaver = Future<void> Function(Iterable<RouteSettings> activeRoutes);
 
 /// will be called to restore previous routes
 typedef NavigationRoutesRestorer = Future<Iterable<RouteSettings>> Function();
@@ -36,14 +35,10 @@ class NavigationSaver extends NavigatorObserver {
     this._navigationRoutesRestorer, {
     String defaultNavigationRoute,
     bool autoStartStopLogic = true,
-  })  : assert(null != _navigationRoutesSaver,
-            'navigationRoutesSaver should not ne null'),
-        assert(null != _navigationRoutesRestorer,
-            'navigationRoutesRestorer should not ne null'),
-        assert(null != autoStartStopLogic,
-            'autoStartStopLogic should not ne null'),
-        this._defaultNavigationRoute =
-            defaultNavigationRoute ?? Navigator.defaultRouteName,
+  })  : assert(null != _navigationRoutesSaver, 'navigationRoutesSaver should not ne null'),
+        assert(null != _navigationRoutesRestorer, 'navigationRoutesRestorer should not ne null'),
+        assert(null != autoStartStopLogic, 'autoStartStopLogic should not ne null'),
+        _defaultNavigationRoute = defaultNavigationRoute ?? Navigator.defaultRouteName,
         _autoStartStopLogic = autoStartStopLogic;
 
   static final String restoreRouteName = 'navigationSaverRestore';
@@ -60,8 +55,7 @@ class NavigationSaver extends NavigatorObserver {
   int _routesVersion = 0;
   final List<Route<dynamic>> _activeRoutes = <Route<dynamic>>[];
 
-  final StreamController<_RoutesListInfo> _routesToSaveStreamController =
-      StreamController();
+  final StreamController<_RoutesListInfo> _routesToSaveStreamController = StreamController();
   StreamSubscription _routesToSaveStreamSubscription;
 
   /// Call this method from the initial widget to move your app to the root widget
@@ -70,8 +64,7 @@ class NavigationSaver extends NavigatorObserver {
   /// Usually you shouldn't use it directly. Only [NavigationRestorationWidget] usually use it.
   Future<void> restorePreviousRoutes(BuildContext context) async {
     try {
-      final Iterable<RouteSettings> routeSettings =
-          await _navigationRoutesRestorer();
+      final Iterable<RouteSettings> routeSettings = await _navigationRoutesRestorer();
       if (null == routeSettings) {
         throw ArgumentError.notNull('routeSettings');
       }
@@ -95,13 +88,12 @@ class NavigationSaver extends NavigatorObserver {
     WidgetBuilder restoreRouteWidgetBuilder,
   }) {
     if (routeSettings.name == NavigationSaver.restoreRouteName) {
-      final WidgetBuilder builder =
-          (BuildContext context) => NavigationRestorationWidget(
-                navigationSaver: this,
-                child: null == restoreRouteWidgetBuilder
-                    ? Container()
-                    : restoreRouteWidgetBuilder(context),
-              );
+      final WidgetBuilder builder = (BuildContext context) => NavigationRestorationWidget(
+            navigationSaver: this,
+            child: null == restoreRouteWidgetBuilder
+                ? Container()
+                : restoreRouteWidgetBuilder(context),
+          );
       if (Platform.isIOS) {
         return CupertinoPageRoute(builder: builder, settings: routeSettings);
       } else {
@@ -116,11 +108,7 @@ class NavigationSaver extends NavigatorObserver {
         nextPageInfo = routeArguments.nextPageInfo;
       }
       return routeFactory(
-        RouteSettings(
-          name: routeSettings.name,
-          arguments: realArguments,
-          isInitialRoute: routeSettings.isInitialRoute,
-        ),
+        routeSettings.copyWith(arguments: realArguments),
         nextPageInfo: nextPageInfo,
       );
     }
@@ -178,9 +166,7 @@ class NavigationSaver extends NavigatorObserver {
         .where((RouteSettings settings) => settings.name != restoreRouteName)
         .map((RouteSettings settings) {
       if (settings.arguments is RestoredArguments) {
-        return RouteSettings(
-          name: settings.name,
-          isInitialRoute: settings.isInitialRoute,
+        return settings.copyWith(
           arguments: (settings.arguments as RestoredArguments).arguments,
         );
       } else {
@@ -191,8 +177,7 @@ class NavigationSaver extends NavigatorObserver {
         .add(_RoutesListInfo(_routesVersion, localActiveRouteSettings));
   }
 
-  void _restoreRoutesInternal(
-      BuildContext context, List<RouteSettings> routeSettings) {
+  void _restoreRoutesInternal(BuildContext context, List<RouteSettings> routeSettings) {
     final NavigatorState navigator = Navigator.of(context);
     while (navigator.canPop()) {
       navigator.pop();
@@ -212,13 +197,11 @@ class NavigationSaver extends NavigatorObserver {
         final RestoredArguments arguments = RestoredArguments(
           null == nextRouteSetting
               ? null
-              : NextPageInfo(
-                  nextRouteSetting.name, currentRouteCompleter.future),
+              : NextPageInfo(nextRouteSetting.name, currentRouteCompleter.future),
           routeSetting.arguments,
         );
         if (i == 0) {
-          navigator.pushReplacementNamed(routeSetting.name,
-              arguments: arguments);
+          navigator.pushReplacementNamed(routeSetting.name, arguments: arguments);
         } else {
           _waitForTheResultAndPublishAsLost(
             () => navigator.pushNamed(routeSetting.name, arguments: arguments),
@@ -241,20 +224,18 @@ class NavigationSaver extends NavigatorObserver {
   }
 
   void _subscribeToStream() {
-    if (null == _routesToSaveStreamSubscription) {
-      _routesToSaveStreamSubscription = _routesToSaveStreamController.stream
-          .asyncMap((_RoutesListInfo info) async {
-        if (info.version == _routesVersion) {
-          await _navigationRoutesSaver(info.routes);
-        }
-      }).listen(
-        (_) {},
-        onError: (e, _) {
-          debugPrint('error happened during navigationRouteSaver call. $e');
-        },
-        cancelOnError: false,
-      );
-    }
+    _routesToSaveStreamSubscription ??=
+        _routesToSaveStreamController.stream.asyncMap((_RoutesListInfo info) async {
+      if (info.version == _routesVersion) {
+        await _navigationRoutesSaver(info.routes);
+      }
+    }).listen(
+      (_) {},
+      onError: (e, _) {
+        debugPrint('error happened during navigationRouteSaver call. $e');
+      },
+      cancelOnError: false,
+    );
   }
 
   void _disposeStream() {

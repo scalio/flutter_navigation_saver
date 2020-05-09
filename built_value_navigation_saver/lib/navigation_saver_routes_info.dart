@@ -31,7 +31,6 @@ abstract class NavigatorRouteSettings
       NavigatorRouteSettings(
         (b) => b
           ..name = routeSettings.name
-          ..isInitialRoute = routeSettings.isInitialRoute
           ..arguments = (routeSettings.arguments is RestoredArguments)
               ? (routeSettings.arguments as RestoredArguments).arguments
               : routeSettings.arguments,
@@ -42,14 +41,11 @@ abstract class NavigatorRouteSettings
 
   String get name;
 
-  bool get isInitialRoute;
-
   @nullable
   Built get arguments;
 
   widgets.RouteSettings toRouteSettings() => widgets.RouteSettings(
         name: name,
-        isInitialRoute: isInitialRoute,
         arguments: arguments,
       );
 }

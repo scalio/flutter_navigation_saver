@@ -1,3 +1,15 @@
+## [0.3.2] - 09.05.2020
+
+* Dependencies upgrade
+
+## [0.3.1] - 09.05.2020
+
+* Dependencies upgrade
+
+## [0.3.0] - 09.05.2020
+
+* Navigation 2.0 migration
+
 ## [0.2.1+1] - 17.12.2019
 
 * Add error check on restoration

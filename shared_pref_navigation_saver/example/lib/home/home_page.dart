@@ -57,13 +57,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Text(
                 '$_counter',
-                style: Theme.of(context).textTheme.display1,
+                style: Theme.of(context).textTheme.headline4,
               ),
               RaisedButton(
                 onPressed: () async {
                   awaitNextPageResult(
                     Navigator.of(context).pushNamed(
-                      "/next",
+                      '/next',
                       arguments: MyHomePageArguments(_counter * 100),
                     ),
                   );
