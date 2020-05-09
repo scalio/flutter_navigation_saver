@@ -44,7 +44,7 @@ class _$RoutesInfoSerializer implements StructuredSerializer<RoutesInfo> {
           result.routes.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(NavigatorRouteSettings)
-              ])) as BuiltList<dynamic>);
+              ])) as BuiltList<Object>);
           break;
       }
     }
@@ -70,9 +70,6 @@ class _$NavigatorRouteSettingsSerializer
     final result = <Object>[
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'isInitialRoute',
-      serializers.serialize(object.isInitialRoute,
-          specifiedType: const FullType(bool)),
     ];
     if (object.arguments != null) {
       result
@@ -99,10 +96,6 @@ class _$NavigatorRouteSettingsSerializer
         case 'name':
           result.name = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
-          break;
-        case 'isInitialRoute':
-          result.isInitialRoute = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
           break;
         case 'arguments':
           result.arguments = serializers.deserialize(value,
@@ -213,22 +206,15 @@ class _$NavigatorRouteSettings extends NavigatorRouteSettings {
   @override
   final String name;
   @override
-  final bool isInitialRoute;
-  @override
   final Built<Built, Builder> arguments;
 
   factory _$NavigatorRouteSettings(
           [void Function(NavigatorRouteSettingsBuilder) updates]) =>
       (new NavigatorRouteSettingsBuilder()..update(updates)).build();
 
-  _$NavigatorRouteSettings._({this.name, this.isInitialRoute, this.arguments})
-      : super._() {
+  _$NavigatorRouteSettings._({this.name, this.arguments}) : super._() {
     if (name == null) {
       throw new BuiltValueNullFieldError('NavigatorRouteSettings', 'name');
-    }
-    if (isInitialRoute == null) {
-      throw new BuiltValueNullFieldError(
-          'NavigatorRouteSettings', 'isInitialRoute');
     }
   }
 
@@ -246,21 +232,18 @@ class _$NavigatorRouteSettings extends NavigatorRouteSettings {
     if (identical(other, this)) return true;
     return other is NavigatorRouteSettings &&
         name == other.name &&
-        isInitialRoute == other.isInitialRoute &&
         arguments == other.arguments;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, name.hashCode), isInitialRoute.hashCode),
-        arguments.hashCode));
+    return $jf($jc($jc(0, name.hashCode), arguments.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('NavigatorRouteSettings')
           ..add('name', name)
-          ..add('isInitialRoute', isInitialRoute)
           ..add('arguments', arguments))
         .toString();
   }
@@ -274,11 +257,6 @@ class NavigatorRouteSettingsBuilder
   String get name => _$this._name;
   set name(String name) => _$this._name = name;
 
-  bool _isInitialRoute;
-  bool get isInitialRoute => _$this._isInitialRoute;
-  set isInitialRoute(bool isInitialRoute) =>
-      _$this._isInitialRoute = isInitialRoute;
-
   Built<Built, Builder> _arguments;
   Built<Built, Builder> get arguments => _$this._arguments;
   set arguments(Built<Built, Builder> arguments) =>
@@ -289,7 +267,6 @@ class NavigatorRouteSettingsBuilder
   NavigatorRouteSettingsBuilder get _$this {
     if (_$v != null) {
       _name = _$v.name;
-      _isInitialRoute = _$v.isInitialRoute;
       _arguments = _$v.arguments;
       _$v = null;
     }
@@ -311,9 +288,8 @@ class NavigatorRouteSettingsBuilder
 
   @override
   _$NavigatorRouteSettings build() {
-    final _$result = _$v ??
-        new _$NavigatorRouteSettings._(
-            name: name, isInitialRoute: isInitialRoute, arguments: arguments);
+    final _$result =
+        _$v ?? new _$NavigatorRouteSettings._(name: name, arguments: arguments);
     replace(_$result);
     return _$result;
   }

@@ -7,7 +7,6 @@ void main() {
   Iterable<RouteSettings> savedRoutes = <RouteSettings>[];
   final NavigationSaver _navigatorSaver = NavigationSaver(
     (Iterable<RouteSettings> routes) async {
-      throw Exception('custom error');
       return savedRoutes = routes;
     },
     () async => savedRoutes,

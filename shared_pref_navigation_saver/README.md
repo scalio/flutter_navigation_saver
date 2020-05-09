@@ -16,7 +16,7 @@ This library should be used if you have some special way of serializing argument
 ## General implementation:
 
 1. Include dependencies:
-  `shared_pref_navigation_saver: ^0.2.0`   - current module
+  `shared_pref_navigation_saver: ^0.3.2`   - current module
 2. Include any argument to disk saving library or write it by yourself. We suggest `build value` ([git hub](../built_value_navigation_saver) or [pub link](https://pub.dev/packages/build_value_navigation_saver)) or `json module` ([git hub](../json_navigation_saver) or [pub link](https://pub.dev/packages/json_navigation_saver)).
 3. Create `NavigationSaver` class before your application widget:
 ```

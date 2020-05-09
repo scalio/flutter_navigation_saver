@@ -34,7 +34,6 @@ class RoutesInfo {
 class NavigatorRouteSettings {
   NavigatorRouteSettings({
     @required this.name,
-    @required this.isInitialRoute,
     this.arguments,
   });
 
@@ -45,21 +44,18 @@ class NavigatorRouteSettings {
           widgets.RouteSettings routeSettings) =>
       NavigatorRouteSettings(
         name: routeSettings.name,
-        isInitialRoute: routeSettings.isInitialRoute,
         arguments: (routeSettings.arguments is RestoredArguments)
             ? (routeSettings.arguments as RestoredArguments).arguments
             : routeSettings.arguments,
       );
 
   final String name;
-  final bool isInitialRoute;
   final Map<String, dynamic> arguments;
 
   Map<String, dynamic> toJson() => _$NavigatorRouteSettingsToJson(this);
 
   widgets.RouteSettings toRouteSettings() => widgets.RouteSettings(
         name: name,
-        isInitialRoute: isInitialRoute,
         arguments: arguments,
       );
 }
